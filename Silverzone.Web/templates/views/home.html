@@ -1,0 +1,21 @@
+﻿
+<!-- Header -->
+<div class="navbar navbar-inverse navbar-fixed-top" style="z-index: 999; background-color: #fff !important;border-color: #b13131 !important;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>              <!--  URL path does not start with '/' means > 'Images/silverzone_logo.png' instead of '/Images/silverzone_logo.png'  -->
+            <a ui-sref="book_list"> <img src="Images/silverzone_logo.png" style="height: 67px;" /></a>
+        </div>
+
+        <!-- Component > name must be same as defined in selector -->
+        <menu-Item></menu-Item>
+    </div>
+</div>
+
+<!--  routing page will be display here  -->
+<router-outlet></router-outlet>
+

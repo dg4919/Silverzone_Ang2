@@ -1,0 +1,87 @@
+﻿
+<div class="panel-default">
+
+    <div class="panel-heading" style="text-align: center;">
+        <div class="panel-title">Sign In by {{ userName }}</div>
+        <button type="button"
+                class="close" style="margin-top: -24px;"
+                md-dialog-close>
+            ×
+        </button>
+        <!-- <button type="button" class="close" style="margin-top: -24px;" (click)="dialogRef.close('yoo')"> × </button>-->
+    </div>
+
+  <md-dialog-content style="padding-top:30px" class="panel-body">
+
+        <!--  novalidate is use to stop client side HTML validation  -->
+        <form #user_loginForm="ngForm"
+              (ngSubmit)="onSubmit(user_loginForm.value)">
+
+            <div class="col-md-offset-2">
+
+                <div id="loginForm" ng-if="!is_forgetLogin">
+                    <div style="margin-bottom: 25px;position: relative;" class="form-group">
+                        <span style="position: absolute;top: 10px;left: 15px;"><i class="fa fa-user"></i></span>
+                        <input class="form-control" name="userName"
+                               placeholder="Enter Email/Mobile Number"
+                               type="text" style="padding-left: 37px;" ngModel />
+                    </div>
+
+                    <div style="margin-bottom: 25px;position: relative;" class="form-group">
+                        <span style="position: absolute;top: 10px;left: 15px;"><i class="fa fa-key"></i></span>
+                        <input class="form-control cls_Password"
+                               name="Password" 
+                               placeholder="Enter Password" 
+                               type="password" 
+                               style="padding-left: 37px;" ngModel />
+                        <span style="position: absolute;top: 7px;right: 78px;z-index: 10;"> <a href="#" ng-click="forgetPassword(user_loginForm)">Forgot?</a></span>
+                    </div>
+
+                </div>
+
+                <div id="OTP_container" ng-if="is_forgetLogin" style="display:none;">
+
+                    <div style="margin-bottom: 25px;position: relative;" class="form-group">
+                        <span style="position: absolute;top: 10px;left: 15px;"><i class="fa fa-user"></i></span>
+                        <input class="form-control" name="userName" type="text" ng-model="userInfo.userName" readonly style="padding-left: 37px;">
+                        <span style="position: absolute;top: 7px;right: 76px;z-index: 10;"> <a href="#" ng-click="change_sts()">Change?</a></span>
+                    </div>
+
+                    <div style="margin-bottom: 25px;position: relative;" class="form-group">
+                        <input class="form-control" placeholder="Enter OTP" type="text" ng-model="userInfo.sms_OTP" maxlength="6" ng-keyup="userInfo.sms_OTP.length == 6 ? validate_OTP($event) : ''" ng-disabled="is_enable" number-Only>
+                        <span style="position: absolute;top: 7px;right: 74px;z-index: 10;" ng-hide="is_enable" ng-click="forgetLogin_resend()"> <a href="#">Resend?</a></span>
+                    </div>
+
+                    <div style="margin-bottom: 25px;position: relative;" class="form-group">
+                        <span style="position: absolute;top: 10px;left: 15px;"><i class="fa fa-key"></i></span>
+                        <input class="form-control" name="password" placeholder="Set New Password" type="password" ng-model="userInfo.Password" ng-disabled="!is_enable" style="padding-left: 37px;">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="page-footer" style="margin-top: 50px;">
+                <div style="margin-top:10px" class="form-group">
+                    <!--<input type="button" value="Register" class="btn btn-primary pull-left" ng-click="Show_signUpModal()">-->
+                    
+                    <button md-raised-button
+                            color="warn">       <!-- color="primary" -->
+                        Register
+                    </button>
+
+                    <button type="submit"
+                            md-raised-button
+                            color="accent"
+                            class="pull-right">
+                        Login
+                    </button>
+
+                </div>
+            </div>
+
+        </form>
+
+    </md-dialog-content>
+
+</div>
+

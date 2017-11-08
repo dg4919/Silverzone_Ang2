@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverzone.Data", "Silverzone.Data\Silverzone.Data.csproj", "{A6A0AD87-2397-49D1-A9EA-9DC3E8F90D4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8D67558-4594-49C8-8816-FA19D20A51CE} = {F8D67558-4594-49C8-8816-FA19D20A51CE}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverzone.Entities", "Silverzone.Entities\Silverzone.Entities.csproj", "{F8D67558-4594-49C8-8816-FA19D20A51CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverzone.Web", "Silverzone.Web\Silverzone.Web.csproj", "{03D50F6D-32D0-4D58-B006-193FFF0E12B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverzone.Api", "Silverzone.Api\Silverzone.Api.csproj", "{0E801E5E-DCED-4E50-A840-38831EE7FF23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6A0AD87-2397-49D1-A9EA-9DC3E8F90D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A0AD87-2397-49D1-A9EA-9DC3E8F90D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A0AD87-2397-49D1-A9EA-9DC3E8F90D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A0AD87-2397-49D1-A9EA-9DC3E8F90D4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D67558-4594-49C8-8816-FA19D20A51CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D67558-4594-49C8-8816-FA19D20A51CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D67558-4594-49C8-8816-FA19D20A51CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D67558-4594-49C8-8816-FA19D20A51CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D50F6D-32D0-4D58-B006-193FFF0E12B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D50F6D-32D0-4D58-B006-193FFF0E12B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D50F6D-32D0-4D58-B006-193FFF0E12B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D50F6D-32D0-4D58-B006-193FFF0E12B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E801E5E-DCED-4E50-A840-38831EE7FF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E801E5E-DCED-4E50-A840-38831EE7FF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E801E5E-DCED-4E50-A840-38831EE7FF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E801E5E-DCED-4E50-A840-38831EE7FF23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dg4919-myprojects.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Silverzone.Api\\Silverzone.Api.csproj
+		SccProjectName1 = Silverzone.Api
+		SccLocalPath1 = Silverzone.Api
+		SccProjectUniqueName2 = Silverzone.Data\\Silverzone.Data.csproj
+		SccProjectName2 = Silverzone.Data
+		SccLocalPath2 = Silverzone.Data
+		SccProjectUniqueName3 = Silverzone.Entities\\Silverzone.Entities.csproj
+		SccProjectName3 = Silverzone.Entities
+		SccLocalPath3 = Silverzone.Entities
+		SccProjectUniqueName4 = Silverzone.Web\\Silverzone.Web.csproj
+		SccProjectName4 = Silverzone.Web
+		SccLocalPath4 = Silverzone.Web
+	EndGlobalSection
+EndGlobal

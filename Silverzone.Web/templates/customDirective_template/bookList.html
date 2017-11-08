@@ -1,0 +1,57 @@
+﻿
+<div class="thumbnail" style="background-color: #f5f5f5;">
+   
+    <div style="text-align:center;padding: 3px;width: 80%;position: absolute;height: 23px;color: #fff;background-color: #ec99a1;"
+         *ngIf="!book.In_stock">
+        <b>Out of Stock</b>
+    </div>
+    <div style="text-align:center;padding: 3px;width: 80%;position: absolute;height: 23px;color: #fff;background-color: rgba(101, 153, 216, 0.89);"
+         *ngIf="book.In_stock && book.CouponInfo">
+        <b *ngIf="book.CouponInfo.couponType === 1"> Flat <i class="fa fa-inr"></i> {{ book.CouponInfo.couponPrice }} OFF </b>
+        <b *ngIf="book.CouponInfo.couponType === 2"> {{ book.CouponInfo.couponPrice }}% Discount </b>
+    </div>
+    <!--val  {{ book.book_title | stringFilter }}-->
+
+    <a [routerLink]="['/Book/Info', book.BookId, book.book_title | stringFilter]">
+        <img [src]="book.BookImage" class="img-responsive" style="margin: 0 auto; height:170px;" />    <!--  one time Binding > same data won't bind again  -->
+    </a>
+
+    <div class="product-info">
+        <!-- ui-sref = "route name define with .state + {}"  -->                                 <!-- bind use to bind value as HTML in <a> tag  -->
+        <div class="name-container">
+            <a class="name"
+               [routerLink]="['/Book/Info', book.BookId, book.book_title | stringFilter]"
+               [innerHTML]="book.book_title">
+                <!--  <a> tag has html binding -->
+            </a>
+        </div>
+
+        <!--{{ book.CouponInfo | json }}-->
+        <div class="price" style="margin: 6px 0px 6px 0px;">
+            <strong><i class="fa fa-inr"></i> </strong>
+            <span [innerText]="book.Price"
+                  [style.textDecoration]="book.CouponInfo && 'line-through'"></span>      <!--  2nd way  >  [ngStyle]="book.CouponInfo && { 'text-decoration' : 'line-through' }"-->
+
+            <span *ngIf="book.CouponInfo"
+                  [innerHTML]="book.CouponInfo.book_newPrice"></span>    <!-- 2nd Way >   innerText="{{ book.CouponInfo.book_newPrice }}" -->
+        </div>
+
+        <div style="margin-bottom: 5px;">
+            <input type="button"
+                   class="btn btn-primary btn-xs"
+                   (click)="onSelect(book)"
+                   value="Details"/>
+
+            <input type="button"
+                   class="btn btn-primary btn-xs"
+                   (click)="book.In_stock && !rsc.buyBook_isDisable[book.BookId] && addtoCart(book)"
+                   [value]="rsc.buyBook_isDisable[book.BookId] ? 'Added' : 'Buy Now'"
+                   [attr.disabled]="!book.In_stock || rsc.buyBook_isDisable[book.BookId]" />      <!--  1st condison to chek book.In_stock & then buyBook_isDisable -->
+
+        </div>
+
+    </div>
+
+
+
+</div>

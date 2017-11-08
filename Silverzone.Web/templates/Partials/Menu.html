@@ -1,0 +1,43 @@
+﻿
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['/Book/List']">Home</a> </li>
+        <li><a href="#">About Us</a> </li>
+        <li><a href="#">Contact Us</a> </li>
+
+        <li class="dropdown">
+            <a class="dropbtn" href="#">
+                <i class="fa fa-shopping-cart"></i>
+                <span style="margin-left: 8px;"
+                      [innerHTML]="'Item(s): ' + rsc.cart.Items.length || 0"> </span>
+            </a>                                                  <!--  if(true) then run > but we r doing opposite > if(false) then Run  -->
+            <cart_Box></cart_Box>
+        </li>
+
+        <li class="dropdown">
+            <!--  click fx 'Show_signInModal' will call only if user is not login  -->
+            <!--<a href="#" class="dropbtn" ng-click="!user.is_login && Show_signInModal()" ng-bind="user.is_login ? 'My Account' : 'Login'"> </a>-->
+
+            <div class="dropbtn" style="color: #000;">
+                Hello,
+                <p> {{ this.userSvc.isLoggedIn ? this.userSvc.currentUser.UserName : 'Admin' }} </p>
+
+                <button class="user-info"
+                        color="accent"
+                        md-raised-button
+                        style="font-size: 13px; font-weight: bold;"
+                        (click)="login()">
+                    Login
+                </button>
+            </div>
+
+            <div class="dropdown-content" style="right: -20px;">
+                <a href="#" ui-sref="user_profile">Account </a>
+                <a href="#"> Orders </a>
+                <a href="#"> Dashboard </a>
+                <a href="#"> logout </a>
+            </div>
+        </li>
+
+    </ul>
+</div>

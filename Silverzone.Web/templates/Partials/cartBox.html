@@ -1,0 +1,43 @@
+﻿<div class="dropdown-content"
+     *ngIf="rsc.cart.Items.length">
+
+    <div style="border-bottom: 1px solid #6f4242;display: table;padding: 10px 0px 10px 0px;"
+         *ngFor="let cartInfo of rsc.cart.Items; let $index = index;">
+        <div class="col-sm-3">
+            <a class="thumbnail" style="padding: 5px !important;">
+                <img class="img-responsive"
+                     [src]="cartInfo.bookImage"
+                     style="margin: 0 auto;height: 50px;width: 42px;">
+            </a>
+        </div>
+
+        <div class="col-sm-7" style="padding: 0 !important; display: table;table-layout: fixed;">
+
+            <!-----  For Bundle  ----->
+            <h5 style="color: #848484; font-size: 0.9em; margin: 2px !important; cursor:pointer;"
+                [innerHTML]="cartInfo.bookTitle"
+                (click)="onTitleClick(cartInfo)"></h5>
+            
+            <div style="margin-top: 12px;">
+               <cartAction [cartQty]="cartInfo.bookQty"
+                           [currentIndex]="$index"></cartAction>
+            </div>
+        </div>
+        <div class="col-sm-2" style="padding: 0; text-align:center;">
+            <p>
+                <i class="fa fa-inr"
+                   [innerHtml]="'  ' + cartInfo.bookTotalPrice"></i>   <!--   '  ' use to give space -->
+            </p>
+            <p><i class="fa fa-trash" style="cursor: pointer;color: #00B9F5!important;"></i></p>
+        </div>
+    </div>
+
+    <div class="row" style="padding: 8px; margin: 0 auto;">
+        <button class="btn btn-info col-md-12"
+                md-raised-button
+                (click)="proceed()">
+            Proceed
+        </button>
+    </div>
+
+</div>

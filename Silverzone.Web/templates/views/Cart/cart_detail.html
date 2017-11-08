@@ -1,0 +1,157 @@
+﻿<style>
+    #cart_detailContainer a:hover {
+        text-decoration: none;
+    }
+</style>
+
+<div id="cart_detailContainer">
+
+    <div class="row" style="margin-top: 20px;">
+        <h3>
+            <em>Review</em> your cart:
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-md-6">
+                <a class="btn btn-default"
+                   [routerLink]="['/shippingAddress']">Checkout</a>
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-default" href="#" ui-sref="book_list">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center"
+                 *ngIf="!rsc.cart.Items.length">
+                <h3>Oops! there is no item in your bag :( </h3>
+                <a  [routerLink]="['/Book/List']"
+                        color="primary"
+                        md-raised-button>
+                    <i class="fa fa-plus"></i>  Add items
+                </a>
+            </div>
+
+            <div class="col-lg-11"
+                 *ngIf="rsc.cart.Items.length">
+                <div class="panel panel-primary">
+                    <div class="panel-heading panel-primary">
+                        <div class="panel-title">
+                            Your Cart Items- {{ rsc.cart.Items.length }} Item(s)
+                            <div class="text-right" style="margin-top:-20px;">Order Total: <i class="fa fa-rupee" [innerHtml]="' ' + (rsc.cart.shipping_Amount + rsc.cart.shipping_Charges)"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table panel-primary">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Book Image
+                                    </th>
+                                    <th>
+                                        Book Name
+                                    </th>
+                                    <th>
+                                        Price (each)
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>SubTotal</th>
+                                    <th></th>
+                                </tr>
+
+                                <tr *ngFor="let cartItems of rsc.cart.Items; let $index = index;">
+                                    <td>
+                                        <img [src]="cartItems.bookImage" class="img-responsive img-bordered" style="width: 75px;" />
+                                    </td>
+                                    <td [innerHTML]="cartItems.bookTitle"></td>
+                                    <td>
+                                        <i class="fa fa-rupee"></i>
+                                        {{ cartItems.book_newPrice || cartItems.bookPrice }}
+                                    </td>
+                                    <td id="item-count-id">
+                                        <div class="input-group input-group-lg">
+                                            <cartAction [cartQty]="cartItems.bookQty"
+                                                        [currentIndex]="$index"></cartAction>
+                                        </div>
+                                    </td>
+                                    <td style="width: 120px !important;">
+                                        <i class="fa fa-rupee"></i> {{ cartItems.bookTotalPrice }}
+                                    </td>
+                                    <td>
+                                        <!-- define controllerAs cart in Routing  -->
+                                        <a href="#" class="RemoveLink"
+                                           ng-click="cartDetail.removeItem($index)">
+                                            Remove
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6">
+                                        <hr style="padding: 0px !important; margin: 0 !important;" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Total</strong></td>
+                                    <td><i class="fa fa-rupee"></i> {{ rsc.cart.shipping_Amount }} </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6">
+                                        <hr style="padding: 0px !important; margin: 0 !important;" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <strong>
+                                            Shipping Charges
+                                            <div style="font-size: 75% !important;"> (for first unit @ {{ rsc.cart.CountryType === 1 ? 40 : 1200 }} and rest @ {{ rsc.cart.CountryType === 1 ? 25 : 200 }} each) </div>
+                                        </strong>
+                                    </td>
+                                    <td><i class="fa fa-rupee"></i> {{ rsc.cart.shipping_Charges }} </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6">
+                                        <hr style="padding: 0px !important; margin: 0 !important;" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Payable Amount</strong></td>
+                                    <td><i class="fa fa-rupee"></i> {{ rsc.cart.shipping_Amount + rsc.cart.shipping_Charges }} </td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

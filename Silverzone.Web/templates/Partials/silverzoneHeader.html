@@ -1,0 +1,108 @@
+﻿
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #fff !important;border-color: #b13131 !important;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>              <!--  URL path does not start with '/' means > 'Images/silverzone_logo.png' instead of '/Images/silverzone_logo.png'  -->
+            <a ui-sref="book_list"> <img src="Images/silverzone_logo.png" style="height: 67px;" /></a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Home</a> </li>
+                <li><a href="#">About Us</a> </li>
+                <li><a href="#">Contact Us</a> </li>
+                <li class="dropdown" ng-controller="cartDetailsController as cartDetail">
+                    <a class="dropbtn" href="#">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span style="margin-left: 8px;">Item(s) : {{ (!Newshopping && cart.Items.length) || 0 }}</span>
+                    </a>                                                  <!--  if(true) then run > but we r doing opposite > if(false) then Run  -->  
+                    <div class="dropdown-content" ng-if="(cart.Items.length > 0) && (!show_cartDetail_popUp())">
+
+                        <div id="cartItemsContainer" ng-scrollbars>    <!-- ng-scrollbars is directive to show scrollbar -->
+                              <!--  cartItemsList is a rootscope variable hence not use cart.cartItemsList  -->
+                            <div style="border-bottom: 1px solid #6f4242;display: table;padding: 10px 0px 10px 0px;" ng-repeat="item in cart.Items track by $index">
+                                <div class="col-sm-3">
+                                    <a ui-sref="book_details({bookId : item.bookId, bookTitle : ((item.bookTitle | split: ':' : 0) | stringFilter) })" 
+                                       ng-if="item.bookType === 1"
+                                       class="thumbnail" style="padding: 5px !important;">
+                                        <img ng-src="{{ item.bookImage}}" class="img-responsive" style="margin: 0 auto;height: 50px;width: 42px;">
+                                    </a>
+
+                                    <a show-Bundle:Modal bundleId="{{item.bookId}}"
+                                       ng-if="item.bookType === 2"
+                                       class="thumbnail" style="padding: 5px !important;">
+                                        <img ng-src="{{ item.bookImage}}" class="img-responsive" style="margin: 0 auto;height: 50px;width: 42px;">
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-7" style="padding: 0 !important; display: table;table-layout: fixed;">
+                                    
+                                    <!-----  For Book  ----->
+                                    <h5 style="color: #848484; font-size: 0.9em; margin: 2px !important; cursor:pointer;" ng-bind="item.bookTitle"
+                                        ng-style="isHover" ng-mouseover="isHover = {'color': '#458ecc'}" ng-mouseleave="isHover = {'color': '#848484'}"
+                                        ng-click="cartDetail.goto_bookDetail(item.bookId)"
+                                        ng-if="item.bookType === 1"></h5>
+
+                                    <!-----  For Bundle  ----->
+                                    <h5 style="color: #848484; font-size: 0.9em; margin: 2px !important; cursor:pointer;" ng-bind="item.bookTitle"
+                                        ng-style="isHover" ng-mouseover="isHover = {'color': '#458ecc'}" ng-mouseleave="isHover = {'color': '#848484'}"
+                                        show-Bundle:Modal bundleId="{{item.bookId}}"
+                                        ng-if="item.bookType === 2"></h5>
+
+                                      <!--  if condison true then only ng-style will apply otherwise or condison  -->  
+
+                                    <div style="margin-top: 12px;">
+                                        <button class="btn btn-default btn-guests btn-guests-minus btn-sm" style="font-size: 7px !important;" ng-click="cartDetail.addCartqty(true, $index)">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                <i class="fa fa-plus fa-stack-1x"></i>
+                                            </span>
+                                        </button>
+                                        <input type="text" id="book_cart_count" style="width: 60px;text-align: center;" maxlength="2" ng-model="item.bookQty" ng-keyup="cartDetail.updateQty($index)">
+                                        <button class="btn btn-default btn-guests btn-guests-plus btn-sm" style="font-size: 7px !important;" ng-click="cartDetail.addCartqty(false, $index)">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                                <i class="fa fa-minus fa-stack-1x"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-2" style="padding: 0; text-align:center;">
+                                    <p><i class="fa fa-inr"></i> {{ item.bookTotalPrice | number : 2 }} </p>
+                                    <p><i class="fa fa-trash" ng-click="cartDetail.removeItem($index)" style="cursor: pointer;color: #00B9F5!important;"></i></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row col-md-offset-2" style="padding: 8px;">
+                            <input type="button" class="btn btn-info col-md-12" value="Proceed" ng-click="cartDetail.cart_proceedModal()">
+                        </div>
+
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <!--  click fx 'Show_signInModal' will call only if user is not login  --> 
+                    <!--<a href="#" class="dropbtn" ng-click="!user.is_login && Show_signInModal()" ng-bind="user.is_login ? 'My Account' : 'Login'"> </a>-->
+
+                    <a href="#" class="dropbtn ng-binding" ng-click="!user.is_login &amp;&amp; Show_signInModal()">
+                        <img class="nav-user-photo img-circle" ng-src="{{user.currentUser.ProfilePic || '/Images/profile-img.jpg' }}" alt="Profile Pic" style="height: 40px; width: 40px;" ng-if="user.is_login">
+                        <span class="user-info" style="font-size: 13px; font-weight: bold;" ng-bind="user.is_login ? user.currentUser.UserName || 'My Account' : 'Login'"> Shyam </span>
+                    </a>
+
+                    <div class="dropdown-content" style="right: -20px;" ng-if="user.is_login">
+                        <a href="#" ui-sref="user_profile">Account </a>
+                        <a href="#"> Orders </a>
+                        <a href="#"> Dashboard </a>
+                        <a href="#" ng-click="user_logOut()"> logout </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

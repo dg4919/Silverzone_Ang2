@@ -1,0 +1,84 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!--  Use to fetch relative URL & resolve issue of angular client side Routing
+    Suppose we have URL > http://localhost/silverzone/ but it will take http://localhost/ only, if we dont use base href
+    Use href="~/" instead of href="/" bcoz it will return full prefix relative URL
+    -->
+    <base href="~/" />
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="96x96" href="Images/favicon-96x96.png">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Silverzone Olympiads </title>
+
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/font-awesome.css" rel="stylesheet" />
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/pnotify.css" rel="stylesheet" />
+    <link href="/Content/angular-block-ui.css" rel="stylesheet" />
+    <link href="/Content/isteven-multi-select.css" rel="stylesheet" />
+    <link href="/Content/jquery.mCustomScrollbar.css" rel="stylesheet" />
+    <link href="/Content/ng2.css" rel="stylesheet" />
+
+    <style>
+        .close {
+            outline: none !important;
+        }
+
+        /* this class will apply in Modal setting */
+        .loginModal .modal-dialog {
+            width: 33% !important;
+        }
+
+        .shippingAdressModal .modal-dialog {
+            width: 42% !important;
+        }
+    </style>
+
+    <!-- 1. Load libraries > file will be load from wwwroot path, instead of project -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/core.min.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/hammerjs/hammer.min.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+
+    <script>
+        // it will load files from systemjs.config.js with app name >
+        System.import('Angular2App').catch(function (err) { console.error(err); });
+    </script>
+
+</head>
+
+<body>
+
+    <home>
+        <div class="row text-center">
+            <i class="fa fa-spinner fa-spin"></i> Loading...
+        </div>
+    </home>
+    
+    <div class="row" style="margin-top: 50px;">
+        <div style="height: 45px; padding: 13px; background: #e7e5ff;font-size: small;text-align: center; font-weight: bold;">
+            <p class="copyrights">
+                Copyrights © Silverzone Org @DateTime.Now.Year, All rights reserved.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,189 @@
+﻿<!--- Image slider -->
+<div class="row slider" style="margin-top: 20px;">
+    <div class="col-sm-12">
+        <img src="Images/books_banner.jpg" class="img-responsive" style="width: 100%;height: 300px;" />
+    </div>
+</div>
+
+<!--bookInfo  {{ bookDetail | json }}-->
+
+<!--- Content -->
+<div class="row main_content" style="margin-top: 20px;"
+     *ngIf="bookDetail">
+    <!-- this is must to check if object has data.. otherwise throw eror :) --->
+    <div class="col-md-12">
+
+        <!-- Center View -->
+        <div class="col-md-9">
+
+            <div id="BookSearchDiv"></div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-4" style="cursor: pointer; width:28% !important;">
+                        <div class="thumbnail">
+                            <div style="text-align:center;padding: 3px;width: 80%;position: absolute;height: 23px;color: #fff;background-color: rgba(101, 153, 216, 0.89);">
+                            </div>
+                            <img id="item-display" class="img-responsive"
+                                 [src]="bookDetail.book_info.BookImage"
+                                 style="height: 200px; margin:0 auto;">
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <h4>
+                            <span [innerHtml]="bookDetail.book_info.book_title + ' : ' + bookDetail.book_info.Category + ' - ' + bookDetail.book_info.Class">
+                            </span>
+                        </h4>
+
+                        <hr>
+                        <div class="product-price">
+                            <b>
+                                <i class="fa fa-inr"
+                                   [innerHtml]="' ' + bookDetail.book_info.Price"></i>
+                            </b>
+                        </div>
+                        <div class="text-info">
+                            <b [innerHtml]="bookDetail.book_info.In_stock ? 'In Stock': 'Out of Stock'"></b>
+                        </div>
+
+                        <div class="text-warning">
+                            <a href="" scroll:to="bundleTab">
+                                This Book is also available in Bundle (Click to View)
+                            </a>
+                        </div>
+
+                        <div style="margin-top: 12px;">
+                            <button class="btn btn-default btn-sm"
+                                    style="font-size: 7px !important;"
+                                    (click)="changeQty(bookQty, true)">
+                                <span class="fa-stack">
+                                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                    <i class="fa fa-plus fa-stack-1x"></i>
+                                </span>
+                            </button>
+                            <input type="text" 
+                                   style="width: 60px;text-align: center;" maxlength="2"
+                                   #bookQty
+                                   value="1"
+                                   (keyup)="onkeyPress(bookQty)">
+                            <button class="btn btn-default btn-sm" 
+                                    style="font-size: 7px !important;"
+                                    (click)="changeQty(bookQty, false)">
+                                <span class="fa-stack">
+                                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                                    <i class="fa fa-minus fa-stack-1x"></i>
+                                </span>
+                            </button>
+                        </div>
+
+                        <hr>
+                        
+                        <div class="btn-group cart">
+                            <button type="button" class="btn btn-success"
+                                    (click)="bookDetail.book_info.In_stock && addToCart(bookQty.value)"
+                                    [disabled]="!bookDetail.book_info.In_stock">
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    
+                </div>
+                
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12 product-info">
+
+                        <!--  dynamicHeight use to apply own custom css -->
+                        <md-tab-group dynamicHeight>
+                            <md-tab label="DESCRIPTION">
+                                <section style="padding: 7px !important;"
+                                         [innerHtml]="bookDetail.book_info.BookDescription"></section>
+                            </md-tab>
+                            <md-tab label="PRODUCT INFO">
+                                <section>
+                                    <div *ngFor="let book_content of bookDetail.book_info.contents"
+                                         [innerHtml]="book_content.content_name">
+                                    </div>
+                                </section>
+                            </md-tab>
+                           
+                             <md-tab label="Reviews" style="overflow: hidden !important;">   <!--  style applied coz of dynamicHeight  --> 
+                                <div style="margin: 0px 7px 7px 7px;">
+                                    <h4>Top Customer Reviews</h4>
+                                </div>
+                                <div style="border-top: 1px solid #ddd; display: table; margin-top: 6px;padding-top: 6px;">
+                                    <div class="col-sm-3" style="margin-top: 20px;">
+                                        <div style="color: #e9ce18; font-size: larger;">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                        </div>
+                                        <span style="font-size: 1.2em;margin-top: -7px;">Divya Gupta</span>
+                                        <p style="color: #848484;font-size: 0.9em;">17 Aug 2016</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h4>Corsair Gaming Series GS600 Features:</h4>
+                                        <p style="color: #848484;margin-bottom: 10px;font-weight: normal;font-size: 0.9em;margin-top: 6px;">
+                                            The Corsair Gaming Series GS600 power supply is the ideal price-performance solution for building or upgrading a Gaming PC.
+                                            A single +12V rail provides up to 48A of reliable, continuous power for multi-core gaming PCs with multiple graphics cards.
+                                        </p>
+                                    </div>
+                                </div>
+                            </md-tab>
+
+                        </md-tab-group>
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px; border: 1px solid #ddd; padding: 0px 15px;">
+                    <div class="row">
+
+                        <div class="panel-heading" style="background: #bce8f1;margin: 10px;">
+                            <h1 class="panel-title">Suggestion for you</h1>
+                        </div>
+
+                        <div>
+                            <div class="col-sm-4 col-lg-4 col-md-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="panel-heading" style="background: #faebcc;margin: 10px;">
+                            <h1 class="panel-title">Recommend for you</h1>
+                        </div>
+
+                        <div>
+                            <div class="col-sm-4 col-lg-4 col-md-4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bundleTab" class="row">
+                        <div class="panel-heading" style="background: #eee;margin: 10px;">
+                            <h1 class="panel-title"> Bundles </h1>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right View -->
+        <div class="col-md-3">
+        </div>
+
+    </div>
+</div>
+
+
+
+
